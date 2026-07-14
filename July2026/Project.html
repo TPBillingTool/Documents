@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Tool | Teleperformance Global</title>
+    <style>
+        /* CSS Variables for Modern Dark Corporate Theme */
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-blue: #38bdf8;
+            --border-color: #334155;
+            --glass-bg: rgba(15, 23, 42, 0.85);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Semi-transparent Topbar */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 70px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-blue);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-blue);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: var(--bg-dark);
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0284c7;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 5% 80px;
+            text-align: center;
+            background: radial-gradient(circle at 50% -20%, #1e293b 0%, #0f172a 70%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-image-container {
+            max-width: 1000px;
+            margin: 50px auto 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border-color);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image-container:hover {
+            transform: translateY(-10px);
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Split Sections */
+        .split-section {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .split-section.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .split-text {
+            flex: 1;
+        }
+
+        .split-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .split-text p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .split-text ul {
+            margin-left: 20px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+        }
+
+        /* Split Image Styles */
+        .split-image {
+            flex: 1.2;
+            position: relative;
+        }
+
+        .split-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .split-image img:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-blue);
+        }
+
+        .bg-alt {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        footer {
+            padding: 40px 5%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 1024px) {
+
+            .split-section,
+            .split-section.reverse {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .split-text ul {
+                text-align: left;
+                display: inline-block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">TP <span>BillingTool</span></div>
+        <nav>
+            <ul>
+                <li><a href="#mandate">Mandate</a></li>
+                <li><a href="#standards">ISO</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#workflows">Workflows</a></li>
+                <li><a href="#security">Zero-Trust</a></li>
+                <li><a href="#ai">AI Engine</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="btn-primary">Access System</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-badge">Global Financial Engine</div>
+        <h1>Building on Solid Rock.</h1>
+        <p>An enterprise-grade provisioning and invoicing platform engineered to uncompromising international standards.
+            Delivering zero operational downtime globally.</p>
+
+        <!-- Hero Graphic -->
+        <div class="hero-image-container">
+            <img src="imgs/1.png" alt="BillingTool: The Global Financial Engine">
+        </div>
+    </section>
+
+    <!-- Section: The Mandate -->
+    <section class="split-section" id="mandate">
+        <div class="split-text">
+            <h2>The Executive Mandate</h2>
+            <p>Leaving behind the fragile past of spreadsheet-based processes, human error risks, and siloed operations.
+                The future is engineered.</p>
+            <p>The BillingTool provides automated transitions from provision to invoice, centralized auditing, and
+                strict compliance tracking for 130+ countries.</p>
+        </div>
+        <div class="split-image">
+            <img src="imgs/2.png" alt="The Executive Mandate">
+        </div>
+    </section>
+
+    <!-- Section: ISO Standards (Alternate Background) -->
+    <div class="bg-alt" id="standards">
+        <section class="split-section reverse">
+            <div class="split-text">
+                <h2>Certified Engineering Excellence</h2>
+                <p>Architected strictly to international lifecycle standards to guarantee traceability and consistency.
+                </p>
+                <ul>
+                    <li><strong>ISO/IEC/IEEE 12207:2017:</strong> Software Lifecycle maturity.</li>
+                    <li><strong>ISO 24774:</strong> Process Definition and architecture execution.</li>
+                </ul>
+                <p>Ensuring rapid, error-free global deployment under strict change control and SonarQube quality gates.
+                </p>
+            </div>
+            <div class="split-image">
+                <img src="imgs/3.png" alt="ISO Lifecycle Standards">
+            </div>
+        </section>
+    </div>
+
+    <!-- Section: Evolutionary Delivery -->
+    <section class="split-section" id="architecture">
+        <div class="split-text">
+            <h2>Evolutionary Delivery: Building on Rock</h2>
+            <p>To mitigate the risks of global "big bang" deployments, we use an Evolutionary Delivery model.</p>
+            <ul>
+                <li><strong>Phase 1: The Host Shell</strong> acts as our foundational rock, managing authentication and
+                    global routing.</li>
+                <li><strong>Phase 2:</strong> Independent country logic (MFEs for Colombia and Peru) is dynamically
+                    plugged in, achieving zero global downtime.</li>
+            </ul>
+        </div>
+        <div class="split-image">
+            <img src="imgs/4.png" alt="Evolutionary Delivery: Core Shell First">
+        </div>
+    </section>
+
+    <!-- Section: Enterprise Monorepo Ecosystem -->
+    <div class="bg-alt">
+        <section class="split-section reverse">
+            <div class="split-text">
+                <h2>Enterprise Monorepo Ecosystem</h2>
+                <p><strong>Nx Orchestration + Native Federation:</strong> Massive scalability with strict dependency
+                    isolation.</p>
+                <p>The Shell orchestrator dynamically loads remotes without tight coupling. Shared libraries
+                    (<em>shared-domain</em>, <em>shared-infra-ui</em>) guarantee that core models never depend on
+                    country-specific code, mitigating cascade failures.</p>
+            </div>
+            <div class="split-image">
+                <img src="imgs/5.png" alt="Enterprise Monorepo Ecosystem Nx">
+            </div>
+        </section>
+    </div>
+
+    <!-- Section: Angular / Django Technology -->
+    <section class="split-section">
+        <div class="split-text">
+            <h2>The Technology Engine</h2>
+            <p>An enterprise-grade stack perfectly suited for robust financial math.</p>
+            <ul>
+                <li><strong>Frontend (Angular):</strong> Ensures strict typing and Native Federation for dynamic module
+                    loading.</li>
+                <li><strong>Backend (Django):</strong> Built-in protection against OWASP Top 10 vulnerabilities (SQLi,
+                    XSS, CSRF) and robust ACID-compliant transaction management.</li>
+            </ul>
+        </div>
+        <div class="split-image">
+            <img src="imgs/6.png" alt="Angular and Django Technology Engine">
+        </div>
+    </section>
+
+    <!-- Section: Hybrid Hexagonal Architecture -->
+    <div class="bg-alt">
+        <section class="split-section reverse">
+            <div class="split-text">
+                <h2>Hybrid Hexagonal Architecture</h2>
+                <p>Driven by <strong>Domain-Driven Design (DDD)</strong>, external systems (ERPs, IdPs) can be swapped
+                    without ever breaking the core financial math.</p>
+                <ul>
+                    <li><strong>Pure Business Logic:</strong> Provision calculations and invoice transitions.</li>
+                    <li><strong>Application Ports:</strong> Orchestration of use cases.</li>
+                    <li><strong>Infrastructure Adapters:</strong> Django Persistence, D365 ERP adapter, OAuth2.</li>
+                </ul>
+            </div>
+            <div class="split-image">
+                <img src="imgs/7.png" alt="Hybrid Hexagonal Architecture DDD">
+            </div>
+        </section>
+    </div>
+
+    <!-- Section: Contextual Workflows -->
+    <section class="split-section" id="workflows">
+        <div class="split-text">
+            <h2>Contextual Workflows: Local Complexity</h2>
+            <p>Both paths utilize the exact same backend core, enforcing local compliance effortlessly.</p>
+            <ul>
+                <li><strong>Path A: Colombia.</strong> <em>Manual flexibility.</em> User inputs descriptions and
+                    executes manual calculations.</li>
+                <li><strong>Path B: Peru.</strong> <em>Highly restricted.</em> Pre-loaded SalesAgreements lock
+                    descriptions and fixed rates; operations only edit quantities.</li>
+            </ul>
+        </div>
+        <div class="split-image">
+            <img src="imgs/8.png" alt="Contextual Workflows: Managing Local Complexity">
+        </div>
+    </section>
+
+    <!-- Section: Zero-Trust Security -->
+    <div class="bg-alt" id="security">
+        <section class="split-section reverse">
+            <div class="split-text">
+                <h2>The Impenetrable Vault (Zero-Trust)</h2>
+                <p>For a financial platform of this caliber, security is paramount. Implemented via a 5-Layer vault:</p>
+                <ul>
+                    <li><strong>Layer 1:</strong> Forced TLS 1.3 & HSTS in transport.</li>
+                    <li><strong>Layer 2/3:</strong> Stateless JWT RBAC validation (OAuth 2.0 + PKCE) & Application
+                        Double-Check.</li>
+                    <li><strong>Layer 4:</strong> Django Security Middleware (CSRF) & Angular DomSanitizer (XSS).</li>
+                    <li><strong>Layer 5:</strong> AES-256 encrypted configuration data persistence.</li>
+                </ul>
+            </div>
+            <div class="split-image">
+                <img src="imgs/9.png" alt="Impenetrable Zero-Trust Vault">
+            </div>
+        </section>
+    </div>
+
+    <!-- Section: Data Sovereignty -->
+    <section class="split-section">
+        <div class="split-text">
+            <h2>Absolute Data Sovereignty</h2>
+            <p>To guarantee compliance with data laws across 130+ nations, we use a strict
+                <strong>DB-per-Tenant</strong> physical isolation model.
+            </p>
+            <p>The Tenant Resolver extracts the country claim from the JWT, passing it to the Dynamic DataSource Router
+                which mathematically prevents cross-tenant query leaks.</p>
+        </div>
+        <div class="split-image">
+            <img src="imgs/10.png" alt="Data Sovereignty: DB-per-Tenant">
+        </div>
+    </section>
+
+    <!-- Section: Next-Gen AI -->
+    <div class="bg-alt" id="ai">
+        <section class="split-section reverse">
+            <div class="split-text">
+                <h2>Next-Gen Capabilities: AI Integration</h2>
+                <p>Accelerating Financial Operations through Advanced Language Models.</p>
+                <ul>
+                    <li><strong>Intelligent Novelties:</strong> Processes informal client emails into structured JSON
+                        novelty grids.</li>
+                    <li><strong>AI Reconciliation:</strong> Analyzes D365 ERP Error Reports and suggests natural
+                        language discrepancy solutions.</li>
+                    <li><strong>Fiscal Rules Mapper:</strong> Reads new country tax PDFs to define base initialization
+                        parameters.</li>
+                </ul>
+            </div>
+            <div class="split-image">
+                <img src="imgs/11.png" alt="Next-Gen Capabilities: AI Integration">
+            </div>
+        </section>
+    </div>
+
+    <!-- Section: The Road Ahead -->
+    <section class="split-section">
+        <div class="split-text">
+            <h2>The Road Ahead: Scaling the Baseline</h2>
+            <p>Architectural Precision designed to eliminate operational risk worldwide.</p>
+            <ul>
+                <li><strong>Step 1: The Baseline.</strong> Validation of Core Shell, routing, and manual vs fixed-rate
+                    operations (CO & PE).</li>
+                <li><strong>Step 2: The Refinement.</strong> Full bidirectional Dynamics 365 sync and AI novelties
+                    integration.</li>
+                <li><strong>Step 3: The Global Engine.</strong> Automated rollout to 130+ countries using parameterized
+                    templates.</li>
+            </ul>
+        </div>
+        <div class="split-image">
+            <img src="imgs/12.png" alt="Scaling the Baseline Roadmap">
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Teleperformance Operations & Global Accounting. All rights reserved. <br> Architected securely
+            following enterprise standards (ISO 12207 / 24774).</p>
+    </footer>
+
+</body>
+
+</html>
